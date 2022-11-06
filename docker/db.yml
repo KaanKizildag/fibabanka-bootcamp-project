@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  fiba_inventory:
+    container_name: fiba_inventory
+    build:
+      context: ./database/inventory_database
+      dockerfile: ./Dockerfile
+    environment:
+      POSTGRES_USER: fibabanka
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - fiba_inventory:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  fiba_shopping:
+    container_name: fiba_shopping
+    build:
+      context: ./database/shopping_database
+      dockerfile: ./Dockerfile
+    environment:
+      POSTGRES_USER: fibabanka
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - fiba_shopping:/data/postgres
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+volumes:
+  fiba_inventory:
+  fiba_shopping:
