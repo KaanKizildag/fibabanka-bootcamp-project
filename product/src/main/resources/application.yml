@@ -1,0 +1,10 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:5432/inventory
+    username: fibabanka
+  jpa:
+    hibernate:
+      ddl-auto: create
