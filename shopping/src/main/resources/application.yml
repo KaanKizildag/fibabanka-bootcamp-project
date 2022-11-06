@@ -1,0 +1,14 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:5433/shopping
+    username: fibabanka
+  jpa:
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
