@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Formula;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -26,11 +23,13 @@ public class CartProduct {
 
     private Long productId;
 
+    @Column(name = "sales_quantity")
     private int salesQuantity;
 
+    @Column(name = "sales_price")
     private BigDecimal salesPrice;
 
-    @Formula("salesPrice * salesQuantity")
+    @Formula("sales_price * sales_quantity")
     private BigDecimal lineAmount;
 
 }

@@ -21,7 +21,7 @@ public class CartProductService {
 
 
     public void deleteProductFromCart(Long cartId, Long productId) {
-
+        cartProductRepository.deleteByCartIdAndProductId(cartId, productId);
     }
 
     public List<CartProductDto> findCartProductByCartId(Long cartId) {
