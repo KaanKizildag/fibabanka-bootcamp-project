@@ -14,11 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
 
-    private final CategoryService categoryService;
+    private final CategoryService categoryServiceImpl;
 
     @GetMapping("/categories")
     public List<CategoryDto> findAllCategories() {
-        return categoryService.findAllCategories();
+        return categoryServiceImpl.findAllCategories();
     }
 
 }

@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tr.fibabanka.dto.ProductDto;
-import tr.fibabanka.service.ProductService;
+import tr.fibabanka.service.ProductServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ProductControllerTest {
 
     @Mock
-    private ProductService productService;
+    private ProductServiceImpl productServiceImpl;
 
     @InjectMocks
     private ProductController productController;
@@ -52,7 +52,7 @@ class ProductControllerTest {
         long categoryId = 1L;
         List<ProductDto> mockProductListByCategoryId = getMockProductListByCategoryId(categoryId);
 
-        Mockito.when(productService.findProductsByCategoryId(categoryId))
+        Mockito.when(productServiceImpl.findProductsByCategoryId(categoryId))
                 .thenReturn(mockProductListByCategoryId);
 
         ResultActions resultActions = mockMvc.perform(get("/inventory/products/" + categoryId)
@@ -71,7 +71,7 @@ class ProductControllerTest {
                     .andExpect(jsonPath("$.[" + i + "].salesPrice", Matchers.is(salesPrice)))
                     .andExpect(jsonPath("$.[" + i + "].categoryId", Matchers.is((int) categoryId)));
         }
-        Mockito.verify(productService).findProductsByCategoryId(categoryId);
+        Mockito.verify(productServiceImpl).findProductsByCategoryId(categoryId);
     }
 
     @SneakyThrows
@@ -81,7 +81,7 @@ class ProductControllerTest {
         ProductDto productDto = getMockProductDto();
         Long productId = 1L;
 
-        Mockito.when(productService.findById(productId)).thenReturn(productDto);
+        Mockito.when(productServiceImpl.findById(productId)).thenReturn(productDto);
 
         mockMvc.perform(get("/inventory/product/" + productId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -91,7 +91,7 @@ class ProductControllerTest {
                 .andExpect(jsonPath("$.salesPrice", Matchers.is(productDto.getSalesPrice().doubleValue())))
                 .andExpect(jsonPath("$.categoryId", Matchers.is(productDto.getCategoryId().intValue())))
                 .andDo(print());
-        Mockito.verify(productService).findById(productId);
+        Mockito.verify(productServiceImpl).findById(productId);
     }
 
     private List<ProductDto> getMockProductListByCategoryId(long categoryId) {

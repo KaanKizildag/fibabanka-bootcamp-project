@@ -15,15 +15,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductService productServiceImpl;
 
     @GetMapping("/products/{categoryId}")
     public List<ProductDto> findProductsByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        return productService.findProductsByCategoryId(categoryId);
+        return productServiceImpl.findProductsByCategoryId(categoryId);
     }
 
     @GetMapping("/product/{id}")
     public ProductDto findProductById(@PathVariable("id") Long id) {
-        return productService.findById(id);
+        return productServiceImpl.findById(id);
     }
 }

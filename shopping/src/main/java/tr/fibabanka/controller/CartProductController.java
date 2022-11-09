@@ -8,22 +8,22 @@ import tr.fibabanka.service.CartProductService;
 @RequestMapping("/shopping")
 public class CartProductController {
 
-    private final CartProductService cartProductService;
+    private final CartProductService cartProductServiceImpl;
 
-    public CartProductController(CartProductService cartProductService) {
-        this.cartProductService = cartProductService;
+    public CartProductController(CartProductService cartProductServiceImpl) {
+        this.cartProductServiceImpl = cartProductServiceImpl;
     }
 
     @PostMapping("/cart/add")
     public CartProductDto addToCart(@RequestBody CartProductDto cartProductDto) {
-        cartProductDto = cartProductService.addProductToCart(cartProductDto);
+        cartProductDto = cartProductServiceImpl.addProductToCart(cartProductDto);
         return cartProductDto;
     }
 
     @DeleteMapping("/cart/{cartId}/remove/{productId}")
     public void deleteProductFromCart(@PathVariable("cartId") Long cartId,
                                       @PathVariable("productId") Long productId) {
-        cartProductService.deleteProductFromCart(cartId, productId);
+        cartProductServiceImpl.deleteProductFromCart(cartId, productId);
     }
 
 }

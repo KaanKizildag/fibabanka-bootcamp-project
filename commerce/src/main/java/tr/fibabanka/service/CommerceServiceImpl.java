@@ -1,4 +1,4 @@
-package tr.fibabanka;
+package tr.fibabanka.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,13 +11,13 @@ import tr.fibabanka.dtos.ProductDto;
 import java.util.List;
 
 @Service
-public class CommerceService {
+public class CommerceServiceImpl implements CommerceService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final Configurations configurations;
 
 
-    public CommerceService(Configurations configurations) {
+    public CommerceServiceImpl(Configurations configurations) {
         this.configurations = configurations;
     }
 

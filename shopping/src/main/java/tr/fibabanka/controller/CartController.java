@@ -11,24 +11,24 @@ import tr.fibabanka.service.CartService;
 @RequestMapping("/shopping")
 public class CartController {
 
-    private final CartService cartService;
+    private final CartService cartServiceImpl;
 
-    public CartController(CartService cartService) {
-        this.cartService = cartService;
+    public CartController(CartService cartServiceImpl) {
+        this.cartServiceImpl = cartServiceImpl;
     }
 
     @GetMapping("/cart/create/{customerName}")
     public Long createCart(@PathVariable("customerName") String customerName) {
-        return cartService.createCart(customerName);
+        return cartServiceImpl.createCart(customerName);
     }
 
     @GetMapping("/checkout/{cartId}")
     public void checkout(@PathVariable("cartId") Long cartId) {
-        cartService.checkout(cartId);
+        cartServiceImpl.checkout(cartId);
     }
 
     @GetMapping("/cart/find/{cartId}")
     public CartDto findCartById(@PathVariable("cartId") Long cartId) {
-        return cartService.findById(cartId);
+        return cartServiceImpl.findById(cartId);
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tr.fibabanka.dto.CartDto;
-import tr.fibabanka.service.CartService;
+import tr.fibabanka.service.CartServiceImpl;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ class CartControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private CartService cartService;
+    private CartServiceImpl cartServiceImpl;
 
     @InjectMocks
     private CartController cartController;
@@ -54,7 +54,7 @@ class CartControllerTest {
     @Test
     @DisplayName("Sepet durumu güncellenebilmelidir.")
     void checkout() throws Exception {
-        Long cartId = 1L;
+        long cartId = 1L;
 
         mockMvc.perform(get("/shopping/checkout/" + cartId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +69,7 @@ class CartControllerTest {
         Long cartId = 1L;
 
         String customerName = "Hüseyin";
-        Mockito.when(cartService.findById(cartId))
+        Mockito.when(cartServiceImpl.findById(cartId))
                 .thenReturn(new CartDto(1L, customerName, new ArrayList<>()));
 
         mockMvc.perform(get("/shopping/cart/find/" + cartId)

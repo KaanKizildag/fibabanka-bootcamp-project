@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tr.fibabanka.dto.CartProductDto;
-import tr.fibabanka.service.CartProductService;
+import tr.fibabanka.service.CartProductServiceImpl;
 
 import java.math.BigDecimal;
 
@@ -31,7 +31,7 @@ class CartProductControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private CartProductService cartProductService;
+    private CartProductServiceImpl cartProductServiceImpl;
 
     @InjectMocks
     private CartProductController cartProductController;
@@ -48,7 +48,7 @@ class CartProductControllerTest {
     void addToCart() {
         CartProductDto cartProductDto = getMockCartProductDto();
 
-        Mockito.when(cartProductService.addProductToCart(Mockito.any()))
+        Mockito.when(cartProductServiceImpl.addProductToCart(Mockito.any()))
                 .thenReturn(cartProductDto);
 
         mockMvc.perform(post("/shopping/cart/add")

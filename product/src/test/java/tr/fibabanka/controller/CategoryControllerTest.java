@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import tr.fibabanka.dto.CategoryDto;
-import tr.fibabanka.service.CategoryService;
+import tr.fibabanka.service.CategoryServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CategoryControllerTest {
 
     @Mock
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryServiceImpl;
 
 
     @Autowired
@@ -51,7 +51,7 @@ class CategoryControllerTest {
     void findAllCategories() {
 
         List<CategoryDto> mockCategoryDtos = getMockCategoryDtos();
-        Mockito.when(categoryService.findAllCategories())
+        Mockito.when(categoryServiceImpl.findAllCategories())
                 .thenReturn(mockCategoryDtos);
 
         mockMvc.perform(get("/inventory/categories")
